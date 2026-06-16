@@ -5,6 +5,7 @@ import type { Workout } from '@/data/workouts';
 import ExerciseCard from './ExerciseCard';
 import WorkoutSection from './WorkoutSection';
 import ProgressBar from './ProgressBar';
+import Link from 'next/link';
 
 type Props = {
   workouts: Workout[];
@@ -64,6 +65,13 @@ export default function WorkoutTracker({ workouts }: Props) {
       <div className="bg-linear-to-r from-[#1a1a2e] to-[#16213e] border-b-2 border-[#e94560] px-4 py-5 text-center">
         <h1 className="text-xl font-bold tracking-wide">💪 My Workout Plans</h1>
         <p className="text-xs text-gray-400 mt-1">Tap each exercise to mark it done</p>
+
+        <Link
+          href="/admin"
+          className="inline-block mt-2 text-[11px] text-[#e94560] border border-[#e94560] px-3 py-1 rounded-lg hover:bg-[#e94560] hover:text-white transition"
+        >
+          ⚙️ Admin
+        </Link>
       </div>
 
       {/* Tabs */}
