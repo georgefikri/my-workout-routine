@@ -4,7 +4,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import type { WorkoutsData } from '@/data/workouts';
 
-const redis = Redis.fromEnv();
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+});
+
 const KV_KEY = 'workouts';
 
 async function getLocalData(): Promise<WorkoutsData> {
