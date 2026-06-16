@@ -1,36 +1,195 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💪 My Workout Routine
 
-## Getting Started
+A personal mobile-first workout tracker built with **Next.js 15**, **TypeScript**, and **Tailwind CSS** — designed to be used at the gym directly from your phone.
 
-First, run the development server:
+---
+
+## 🌐 Live URL
+
+| Page        | URL                                                                                |
+| ----------- | ---------------------------------------------------------------------------------- |
+| Tracker     | [my-workout-routine.vercel.app](https://my-workout-routine.vercel.app)             |
+| Admin Panel | [my-workout-routine.vercel.app/admin](https://my-workout-routine.vercel.app/admin) |
+
+---
+
+## ✨ Features
+
+### Workout Tracker (`/`)
+
+- 4 fully organized workout plans available as tabs
+- Tap any exercise to mark it as done ✅
+- Progress bar showing completion percentage per workout
+- Reset button to clear a session and start fresh
+- Mobile-first UI optimized for gym use
+
+### Admin Panel (`/admin`)
+
+- Password-protected access
+- Add, edit, delete exercises in any workout plan
+- Reorder exercises with ↑ ↓ buttons
+- Changes persist instantly via Upstash Redis
+- No need to touch any code to update your plans
+
+---
+
+## 🏋️ Workout Plans
+
+| Plan              | Type      | Description                                             |
+| ----------------- | --------- | ------------------------------------------------------- |
+| **Upper Regular** | Flat list | Warm-up + full upper body machine & dumbbell work       |
+| **Upper Circuit** | Sectioned | Cardio warm-up → 3 circuits targeting chest, back, arms |
+| **Lower Regular** | Sectioned | Core activation → legs machines & Romanian deadlifts    |
+| **Lower Circuit** | Sectioned | Core warm-up → 2 circuits + leg machine finisher        |
+
+---
+
+## 🗂️ Project Structure
+
+```
+src/
+├── app/
+│   ├── page.tsx                  # SSR entry point (home tracker)
+│   ├── admin/
+│   │   └── page.tsx              # Admin panel (password protected)
+│   └── api/
+│       └── workouts/
+│           └── route.ts          # GET + POST API (Upstash Redis)
+├── components/
+│   ├── WorkoutTracker.tsx        # Main tracker client component
+│   ├── WorkoutSection.tsx        # Sectioned workout renderer
+│   ├── ExerciseCard.tsx          # Individual exercise card
+│   └── ProgressBar.tsx           # Session progress indicator
+└── data/
+    ├── workouts.ts               # TypeScript types
+    └── workouts.json             # Workout data (seed / fallback)
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer     | Technology                         |
+| --------- | ---------------------------------- |
+| Framework | Next.js 15 (App Router, SSR-first) |
+| Language  | TypeScript                         |
+| Styling   | Tailwind CSS                       |
+| Database  | Upstash Redis (serverless)         |
+| Hosting   | Vercel                             |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Vercel CLI (`npm i -g vercel`)
+- Upstash Redis account
+
+### Local Development
+
+**1. Clone the repo**
+
+```bash
+git clone https://github.com/georgefikri/my-workout-routine.git
+cd my-workout-routine
+```
+
+**2. Install dependencies**
+
+```bash
+npm install
+```
+
+**3. Pull environment variables**
+
+```bash
+vercel env pull .env.local
+```
+
+Your `.env.local` should contain:
+
+```dotenv
+KV_REST_API_URL="your_upstash_url"
+KV_REST_API_TOKEN="your_upstash_token"
+```
+
+**4. Run locally**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Environment Variables
 
-## Learn More
+| Variable            | Description              |
+| ------------------- | ------------------------ |
+| `KV_REST_API_URL`   | Upstash Redis REST URL   |
+| `KV_REST_API_TOKEN` | Upstash Redis REST token |
 
-To learn more about Next.js, take a look at the following resources:
+Set these in **Vercel Dashboard → Settings → Environment Variables** for production.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 How to Modify Workout Plans
 
-## Deploy on Vercel
+### Option 1 — Admin Panel (recommended)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Go to `/admin`
+2. Enter password
+3. Select a workout tab
+4. Add / Edit / Delete exercises
+5. Changes save automatically to Redis ✅
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Option 2 — Edit the seed data file
+
+Edit `src/data/workouts.json` directly for bulk changes, then redeploy:
+
+```bash
+git add .
+git commit -m "feat: update workout plans"
+git push
+```
+
+> ⚠️ Note: If data already exists in Redis, editing `workouts.json` alone won't update the live app — use the Admin Panel or flush the Redis key first.
+
+---
+
+## 🔐 Admin Panel
+
+The admin panel is protected by a hardcoded password (personal project).
+
+To change the password, update this line in `src/app/admin/page.tsx`:
+
+```typescript
+const ADMIN_PASSWORD = 'gym123';
+```
+
+---
+
+## 📦 Deployment
+
+The project auto-deploys to Vercel on every `git push` to `main`.
+
+To manually deploy:
+
+```bash
+vercel --prod
+```
+
+---
+
+## 👤 Author
+
+**George Fikri**
+
+- GitHub: [@georgefikri](https://github.com/georgefikri)
+
+---
+
+_Built for personal gym use — stay consistent 💪_
