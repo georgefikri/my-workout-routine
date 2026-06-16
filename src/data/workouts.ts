@@ -1,0 +1,228 @@
+export type Exercise = {
+  name: string;
+  sets?: string;
+  note?: string;
+  isWarmup?: boolean;
+};
+
+export type Section = {
+  label: string;
+  color?: string;
+  exercises: Exercise[];
+};
+
+export type Workout = {
+  id: string;
+  title: string;
+  type: 'flat' | 'sectioned';
+  exercises?: Exercise[];
+  sections?: Section[];
+};
+
+export const workouts: Workout[] = [
+  {
+    id: 'upper-regular',
+    title: 'Upper Training — Regular',
+    type: 'flat',
+    exercises: [
+      { name: 'Cat Cow', note: 'Spinal mobility', isWarmup: true },
+      {
+        name: 'Internal / External Shoulder Rotation',
+        note: 'Both directions',
+        isWarmup: true,
+      },
+      {
+        name: 'Rope Pull — V Shape (Open Arms)',
+        sets: '2 sets',
+        note: 'Open arms wide like hugging motion',
+      },
+      {
+        name: 'Rubber Band Hold',
+        sets: '30 seconds',
+        note: 'Hold firm, keep tension on band',
+      },
+      { name: 'Lat Pull Down Machine', sets: '2 sets', note: '45 kg' },
+      { name: 'Chest Incline Machine', sets: '2 sets', note: '20 kg' },
+      { name: 'Chest Press', sets: '2 sets × 30 reps' },
+      { name: 'Row Machine', sets: '2 sets × 25 reps' },
+      { name: 'Side Lateral Raises', sets: '3 sets × 12 reps', note: '5 kg dumbbells' },
+      { name: 'Crunches', sets: '3 sets' },
+      { name: 'Pole Push (with weight)', sets: '3 sets', note: '+5 kg weight plate' },
+      {
+        name: 'Reverse Fly (Pec Deck Reverse)',
+        sets: '3 sets × 12 reps',
+        note: '12.5 kg — arms open backward',
+      },
+      {
+        name: 'Bicep Curl — Cable or Machine',
+        sets: '3 sets',
+        note: 'As shown in picture',
+      },
+      {
+        name: 'Tricep Push Down — Cable or Machine',
+        sets: '3 sets',
+        note: 'As shown in picture',
+      },
+    ],
+  },
+  {
+    id: 'upper-circuit',
+    title: 'Upper Training — Circuit',
+    type: 'sectioned',
+    sections: [
+      {
+        label: 'Warm-Up',
+        color: '#22c55e',
+        exercises: [
+          { name: 'Cardio', sets: '10 minutes' },
+          { name: 'Cat Cow', sets: '1 set', note: 'Spinal mobility' },
+          { name: 'Internal / External Shoulder Rotation', sets: '1 set' },
+          { name: 'Rope Pull — V Shape', sets: 'Repeat' },
+          { name: 'Shoulder Internal / External Rotation', sets: '1 set' },
+          {
+            name: 'Stretch Band Hold',
+            sets: '40 seconds',
+            note: 'Hold the band firm (afdal masek el astek)',
+          },
+        ],
+      },
+      {
+        label: 'Circuit 1 — × 2 rounds',
+        color: '#f97316',
+        exercises: [
+          {
+            name: 'Squat to Row',
+            sets: '2 × 12 reps',
+            note: 'Squat down + row on the way up',
+          },
+          { name: 'Incline Chest Press', sets: '2 sets' },
+          { name: 'Ball Slam', sets: '2 sets' },
+          {
+            name: 'Lateral Raise',
+            sets: '2 sets',
+            note: 'Arms up to shoulder level with dumbbells',
+          },
+          { name: 'Crunches', sets: '2 sets' },
+          { name: 'Side Plank', sets: '2 sets', note: 'Hold position' },
+        ],
+      },
+      {
+        label: 'Circuit 2',
+        color: '#3b82f6',
+        exercises: [
+          { name: 'Cable / Machine Pull', sets: '1 set' },
+          { name: 'Dumbbell Chest Press', sets: '1 set', note: '6 kg, press up' },
+          { name: 'Treadmill', sets: '1 minute' },
+        ],
+      },
+      {
+        label: 'Circuit 3',
+        color: '#a78bfa',
+        exercises: [
+          { name: 'Bicep Curls', sets: '3 sets', note: '2 × 8 kg dumbbells' },
+          { name: 'Triceps Machine', sets: '3 sets', note: '12.5 kg' },
+          { name: 'Sledge Machine — Pull & Push', sets: '3 sets' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'lower-regular',
+    title: 'Lower Training — Regular',
+    type: 'sectioned',
+    sections: [
+      {
+        label: 'Warm-Up / Activation',
+        color: '#22c55e',
+        exercises: [
+          { name: 'Side Plank Left', sets: '2 sets', note: 'Leaning on one hand' },
+          { name: 'Side Plank Right', sets: '2 sets', note: 'Leaning on one hand' },
+          { name: 'Regular Plank (on knees)', sets: '2 sets' },
+          { name: 'Lateral Leg Raise Left', sets: '2 sets', note: 'Lying on your side' },
+          { name: 'Lateral Leg Raise Right', sets: '2 sets', note: 'Lying on your side' },
+          {
+            name: 'Bird Dog',
+            sets: '2 sets × 30 sec',
+            note: 'Right arm + left leg up → switch',
+          },
+          { name: 'Glute Bridge', sets: '2 sets' },
+          {
+            name: 'Ankle Balance',
+            sets: '2 sets',
+            note: 'Balance on one foot, alternate',
+          },
+        ],
+      },
+      {
+        label: 'Main Exercises',
+        color: '#e94560',
+        exercises: [
+          { name: 'Squats', sets: '3 sets', note: '8 kg' },
+          {
+            name: 'Romanian Deadlift',
+            sets: '3 sets',
+            note: '2 × 8 kg — hinge at hips, slow down, back up',
+          },
+          { name: 'Abductor Machine', sets: '3 sets', note: '60 kg' },
+          { name: 'Abductor Machine (repeat)', sets: '3 sets', note: '60 kg' },
+          { name: 'Leg Extension Machine', sets: '3 sets', note: '25 kg' },
+          { name: 'Leg Curl Machine', sets: '3 sets', note: '20 kg' },
+          {
+            name: 'Seated Calf Raise',
+            sets: '3 sets',
+            note: '25 kg — machine next to abductor',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'lower-circuit',
+    title: 'Lower Training — Circuit',
+    type: 'sectioned',
+    sections: [
+      {
+        label: 'Warm-Up / Activation',
+        color: '#22c55e',
+        exercises: [
+          { name: 'Side Plank Left', sets: '1 set' },
+          { name: 'Side Plank Right', sets: '1 set' },
+          { name: 'Bird Dog', sets: '1 set', note: 'Right arm + left leg up → switch' },
+          { name: 'Regular Plank (on knees)', sets: '1 set' },
+          { name: 'Single Leg Balance — Left foot up', sets: '1 set' },
+          { name: 'Single Leg Balance — Right foot up', sets: '1 set' },
+          { name: 'Lateral Leg Raise Right', sets: '2 sets', note: 'Lying on your side' },
+          { name: 'Lateral Leg Raise Left', sets: '2 sets', note: 'Lying on your side' },
+          { name: 'Glute Bridge', sets: '2 sets' },
+        ],
+      },
+      {
+        label: 'Circuit A — × 3 rounds',
+        color: '#f97316',
+        exercises: [
+          { name: 'Squats', sets: '3 sets' },
+          { name: 'Abductor Machine', sets: '3 sets', note: '60 kg' },
+          { name: 'Push Block (Sled Push / Leg Press)', sets: '3 sets' },
+        ],
+      },
+      {
+        label: 'Circuit B — × 3 rounds',
+        color: '#3b82f6',
+        exercises: [
+          { name: 'Squats with Weight', sets: '3 sets', note: '8 kg' },
+          { name: 'Abductor Machine', sets: '3 sets', note: '40 kg' },
+          { name: 'Pull Block (Cable / Sled Pull)', sets: '3 sets' },
+        ],
+      },
+      {
+        label: 'Finisher',
+        color: '#e94560',
+        exercises: [
+          { name: 'Leg Curl Machine', sets: '3 sets', note: '25 kg' },
+          { name: 'Leg Extension Machine', sets: '3 sets', note: '30 kg' },
+          { name: 'Treadmill', sets: '3 × 1 minute' },
+        ],
+      },
+    ],
+  },
+];
