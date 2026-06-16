@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
 import type { Workout, Exercise, Section } from '@/data/workouts';
 
 const ADMIN_PASSWORD = 'gym123';
@@ -272,17 +273,17 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-[#0f0f13] text-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] border-b-2 border-[#e94560] px-4 py-4 flex items-center justify-between">
+      <div className="bg-linear-to-r from-[#1a1a2e] to-[#16213e] border-b-2 border-[#e94560] px-4 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold">⚙️ Admin Panel</h1>
           <p className="text-xs text-gray-400">Manage your workout plans</p>
         </div>
-        <a
+        <Link
           href="/"
           className="text-xs text-[#e94560] border border-[#e94560] px-3 py-1.5 rounded-lg hover:bg-[#e94560] hover:text-white transition"
         >
           ← Tracker
-        </a>
+        </Link>
       </div>
 
       {/* Workout Tabs */}
